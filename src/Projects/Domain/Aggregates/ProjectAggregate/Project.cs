@@ -9,7 +9,7 @@ public class Project : Entity
     public IReadOnlyCollection<TaskItem> TaskItems => _taskItems.AsReadOnly();
 
     // Constructor privado para EF Core y para forzar la creación a través de métodos de negocio
-    public Project(Guid id, string name, string? description) : base(id)
+    private Project(Guid id, string name) : base(id)
     {
         Name = name;
     }
@@ -32,6 +32,16 @@ public class Project : Entity
         }
 
         _taskItems.Add(taskItem);
+    }
+
+    public static Project Create(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            throw new ArgumentException("Project name cannot be empty.", nameof(name));
+        }
+
+        return new Project(Guid.NewGuid(), name);
     }
 
 }
