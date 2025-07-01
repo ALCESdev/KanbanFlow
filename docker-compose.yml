@@ -1,0 +1,18 @@
+services:
+  # Servicio de base de datos SQL Server
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: kanbanflow-db
+    environment:
+      - SA_PASSWORD=${SA_PASSWORD}
+      - ACCEPT_EULA=Y
+    ports:
+      # Mapea el puerto 1433 del contenedor al 1433 de la máquina
+      - "1433:1433"
+    volumes:
+      # Persiste los datos de la base de datos fuera del contenedor
+      - kanbanflow-db-data:/var/opt/mssql
+
+volumes:
+  # Define el volumen nombrado para la persistencia de datos
+  kanbanflow-db-data:

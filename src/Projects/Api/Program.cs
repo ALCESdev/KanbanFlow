@@ -5,8 +5,6 @@ using KanbanFlow.Projects.Infrastructure.Persistence.Data;
 using KanbanFlow.Projects.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-DotNetEnv.Env.Load();
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
